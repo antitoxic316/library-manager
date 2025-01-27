@@ -21,7 +21,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="libraryTab">
        <attribute name="title">
@@ -53,15 +53,30 @@
          </item>
         </layout>
        </widget>
-       <widget class="QTableWidget" name="tableWidget_2">
+       <widget class="QTableWidget" name="readersTableWidget">
         <property name="geometry">
          <rect>
-          <x>470</x>
-          <y>40</y>
-          <width>256</width>
+          <x>0</x>
+          <y>100</y>
+          <width>561</width>
           <height>192</height>
          </rect>
         </property>
+        <column>
+         <property name="text">
+          <string>name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>last_name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>is_present</string>
+         </property>
+        </column>
        </widget>
       </widget>
       <widget class="QWidget" name="booksTab">
@@ -226,7 +241,7 @@
          <string>Search by</string>
         </property>
        </widget>
-       <widget class="QTableWidget" name="tableWidget">
+       <widget class="QTableWidget" name="booksTableWidget">
         <property name="geometry">
          <rect>
           <x>50</x>
@@ -275,6 +290,19 @@
           <string>id_hidden</string>
          </property>
         </column>
+       </widget>
+       <widget class="QPushButton" name="borrowBookButton">
+        <property name="geometry">
+         <rect>
+          <x>460</x>
+          <y>280</y>
+          <width>80</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>borrow Book</string>
+        </property>
        </widget>
       </widget>
      </widget>

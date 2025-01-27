@@ -63,6 +63,14 @@ void Library::fetch_readers(){
     }
 }
 
-bool Library::change_book_property(QString field_name, QString uuid, QVariant new_value){
+bool Library::change_book_properties(QString field_name, QString uuid, QVariant new_value){
+    bool ok = this->db_handler.change_book_field_value_query(field_name, uuid, new_value);
 
+    return ok;
+}
+
+bool Library::borrow_book(QString uuid){
+    bool ok = this->db_handler.change_book_field_value_query("state", uuid, 1);
+
+    return ok;
 }

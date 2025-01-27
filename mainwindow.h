@@ -44,6 +44,7 @@ public:
 
 private slots:
     void add_book_accepted();
+    void new_properties_accepted();
 
 private:
     Ui::MainWindow *ui;

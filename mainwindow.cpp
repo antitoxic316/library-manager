@@ -46,6 +46,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->booksTableWidget->verticalHeader()->setVisible(false);
     ui->booksTableWidget->setColumnHidden(7, true); // id_hidden column for database communication
+
+
+    this->list_readers();
 }
 
 
@@ -158,6 +161,7 @@ void MainWindow::on_filterBooksButton_clicked(){
 }
 
 void MainWindow::on_bookPropertiesButton_clicked(){
+    /*
     list_books();
     if (!this->change_book_dialog_ptr.isNull()) this->change_book_dialog_ptr->deleteLater();
 
@@ -168,6 +172,7 @@ void MainWindow::on_bookPropertiesButton_clicked(){
     connect(this->change_book_dialog_ptr, &AddBookDialog::add_book_accepted, this, &MainWindow::add_book_accepted);
 
     this->change_book_dialog_ptr->show();
+    */
 }
 
 void MainWindow::new_properties_accepted(){
@@ -175,7 +180,16 @@ void MainWindow::new_properties_accepted(){
 }
 
 void MainWindow::on_borrowBookButton_clicked(){
-    this->library->change_book_property(QString field_name, QString uuid, QVariant new_value);
+    int row_i = this->ui->booksTableWidget->currentRow();
+
+    if(row_i == -1){
+        qInfo() << "row not selected, abort";
+        return;
+    }
+
+    QString id_db = this->ui->booksTableWidget->item(row_i, 7)->text();
+
+    this->library.borrow_book(id_db);
 
     list_books();
 }
@@ -192,7 +206,15 @@ void MainWindow::list_readers(){
 
         QTableWidgetItem *name_item = new QTableWidgetItem(current_reader.get_name());
         QTableWidgetItem *last_name_item = new QTableWidgetItem(current_reader.get_last_name());
-        QTableWidgetItem *present_item = new QTableWidgetItem(current_reader.is_present());
+        QString present_str;
+        if(current_reader.is_present()){
+            present_str = "PRESENT";
+        } else {
+            present_str = "NOT PRESENT";
+        }
+        QTableWidgetItem *present_item = new QTableWidgetItem(QString(present_str));
+
+        qInfo() << current_reader.is_present();
 
         this->ui->readersTableWidget->setItem(i, 0, name_item);
         this->ui->readersTableWidget->setItem(i, 1, last_name_item);
